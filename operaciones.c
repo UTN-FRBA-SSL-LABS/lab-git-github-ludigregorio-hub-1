@@ -14,7 +14,6 @@ int restar(int a, int b) {
 
 
 //esta funcion multiplica dos numeros y devuelve el resultado
-
   int multiplicar(int a, int b) {
     return a * b;
   }
