@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "**" ]
     paths:
-      - "operaciones.c"
-      - "readme.md"
+      - "README.md
+      - "README.md"
 
 permissions:
   checks: write
@@ -38,7 +38,7 @@ jobs:
       - name: "C2. multiplicar implementada"
         id: c2
         continue-on-error: true
-        run: "! grep -q 'TODO' operaciones.c"
+        run: "! grep -q 'TODO' README.md
 
       - name: "C3. multiplicar devuelve resultado correcto"
         id: c3
@@ -60,10 +60,10 @@ jobs:
 
       # ── C6–C7. Calidad del código ──────────────────────────────────
 
-      - name: "C6. Sin conflict markers en operaciones.c"
+      - name: "C6. Sin conflict markers en README.md
         id: c6
         continue-on-error: true
-        run: "! grep -qE '^(<<<<<<<|=======|>>>>>>>)' operaciones.c"
+        run: "! grep -qE '^(<<<<<<<|=======|>>>>>>>)' README.md
 
       - name: "C7. esPar funciona correctamente"
         id: c7
@@ -139,37 +139,37 @@ jobs:
       - name: "C15. P1: concepto de branches"
         id: c15
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P1=b' readme.md
+        run: grep -q 'RESPUESTA_P1=b' README.md
 
       - name: "C16. P2: flujo de review"
         id: c16
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P2=b' readme.md
+        run: grep -q 'RESPUESTA_P2=b' README.md
 
       - name: "C17. P3: revert vs reset"
         id: c17
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P3=c' readme.md
+        run: grep -q 'RESPUESTA_P3=c' README.md
 
       - name: "C18. P4: implementaciones de esPar"
         id: c18
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P4=b' readme.md
+        run: grep -q 'RESPUESTA_P4=b' README.md
 
       - name: "C19. P5: commits atomicos"
         id: c19
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P5=c' readme.md
+        run: grep -q 'RESPUESTA_P5=c' README.md
 
       - name: "C20. P6: fetch vs pull"
         id: c20
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P6=b' readme.md
+        run: grep -q 'RESPUESTA_P6=b' README.md
 
       - name: "C21. P7: descripcion de PR"
         id: c21
         continue-on-error: true
-        run: grep -q 'RESPUESTA_P7=c' readme.md
+        run: grep -q 'RESPUESTA_P7=c' README.md
 
       # ── Puntaje final ──────────────────────────────────────────────
 
@@ -236,7 +236,7 @@ jobs:
             row "C3.  multiplicar devuelve resultado correcto"      "$O_C3"   8
             row "C4.  Commit wip: experimento roto existe"          "$O_C4"   8
             row "C5.  Revert del experimento existe"                "$O_C5"   8
-            row "C6.  Sin conflict markers en operaciones.c"        "$O_C6"   8
+            row "C6.  Sin conflict markers en README.md        "$O_C6"   8
             row "C7.  esPar funciona correctamente"                 "$O_C7"   8
             row "C8.  Ningun mensaje de commit vacio o muy corto"   "$O_C8"   4
             row "C9.  Branch feature/mi-funcion fue creada"         "$O_C9"   4
