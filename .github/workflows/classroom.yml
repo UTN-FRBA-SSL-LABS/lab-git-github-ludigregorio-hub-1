@@ -60,10 +60,10 @@ jobs:
 
       # ── C6–C7. Calidad del código ──────────────────────────────────
 
-      - name: "C6. Sin conflict markers en README.md
+      - name: "C6. Sin conflict markers en operaciones.c"
         id: c6
         continue-on-error: true
-        run: "! grep -qE '^(<<<<<<<|=======|>>>>>>>)' README.md
+        run: "! grep -qE '^(<<<<<<<|=======|>>>>>>>)' operaciones.c"
 
       - name: "C7. esPar funciona correctamente"
         id: c7
