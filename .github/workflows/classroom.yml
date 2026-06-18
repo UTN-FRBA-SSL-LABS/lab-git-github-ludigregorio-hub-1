@@ -40,7 +40,7 @@ jobs:
       - name: "C4. Commit wip: experimento roto existe"
         id: c4
         continue-on-error: true
-        run: |
+        run: 
           git log --all --format='%s' | grep -qF 'wip: experimento roto'
 
       - name: "C5. Revert del experimento existe"
