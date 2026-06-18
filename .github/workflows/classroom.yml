@@ -2,51 +2,41 @@ name: GitHub Classroom Workflow
 
 on:
   push:
-  branches: [ "**" ]
-  paths:
-    - "operaciones.c"
-    - "README.md"
+    branches: [ "**" ]
+    paths:
+      - "operaciones.c"
+      - "README.md"
 
 permissions:
   checks: write
   actions: read
   contents: read
-  pull-requests: read
 
 jobs:
-  autograding:
+  build:
     name: Autograding
     runs-on: ubuntu-latest
-    if: github.actor != 'github-classroom[bot]'
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      # ── C1. Compilación ────────────────────────────────────────────
-
+      # — C1. Compilación —
       - name: "C1. Proyecto compila"
         id: c1
         continue-on-error: true
         run: make clean && make
 
-      # ── C2–C3. Implementación de multiplicar ───────────────────────
-
+      # — C2–C3. Implementación de multiplicar —
       - name: "C2. multiplicar implementada"
         id: c2
         continue-on-error: true
-        run: "! grep -q 'TODO' README.md
+        run: "! grep -q 'TODO' operaciones.c"
 
       - name: "C3. multiplicar devuelve resultado correcto"
         id: c3
         continue-on-error: true
-        run: make clean && make && ./calculadora | grep -q '3 \* 5    = 15'
+        run: "make clean && make && ./calculadora | grep -q '3 \\* 5  = 15'"
 
-      # ── C4–C5. Historial de commits ────────────────────────────────
-
+      # — C4–C5. Historial de commits —
       - name: "C4. Commit wip: experimento roto existe"
         id: c4
         continue-on-error: true
@@ -58,17 +48,16 @@ jobs:
         continue-on-error: true
         run: git log --all --format='%s' | grep -q '^Revert'
 
-      # ── C6–C7. Calidad del código ──────────────────────────────────
-
+      # — C6–C7. Calidad del código —
       - name: "C6. Sin conflict markers en operaciones.c"
         id: c6
         continue-on-error: true
-        run: "! grep -qE '^(<<<<<<<|=======|>>>>>>>)' operaciones.c"
+        run: "! grep -qE '^((<<<<<<<|=======|>>>>>>>)' operaciones.c"
 
       - name: "C7. esPar funciona correctamente"
         id: c7
         continue-on-error: true
-        run: make clean && make && ./calculadora | grep -q '4 es par = 1' && ./calculadora | grep -q '7 es par = 0'
+        run: "make clean && make && ./calculadora | grep -q '4 es par = 1' && ./calculadora | grep -q '7 es par = 0'"
 
       # ── C8. Mensajes de commit ─────────────────────────────────────
 
