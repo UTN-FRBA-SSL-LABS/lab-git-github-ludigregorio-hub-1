@@ -40,7 +40,7 @@ jobs:
       - name: "C4. Commit wip: experimento roto existe"
         id: c4
         continue-on-error: true
-        run: 
+        run: |
           git log --all --format='%s' | grep -qF 'wip: experimento roto'
 
       - name: "C5. Revert del experimento existe"
@@ -59,15 +59,13 @@ jobs:
         continue-on-error: true
         run: "make clean && make && ./calculadora | grep -q '4 es par = 1' && ./calculadora | grep -q '7 es par = 0'"
 
-      # ── C8. Mensajes de commit ─────────────────────────────────────
-
+      # — C8. Mensajes de commit —
       - name: "C8. Ningun mensaje de commit vacio o muy corto"
         id: c8
         continue-on-error: true
         run: "! git log --format='%s' | grep -qE '^.{0,4}$'"
 
-      # ── C9–C10. Branch feature/mi-funcion ─────────────────────────
-
+      # — C9–C10. Branch feature/mi-funcion —
       - name: "C9. Branch feature/mi-funcion fue creada"
         id: c9
         continue-on-error: true
@@ -83,8 +81,7 @@ jobs:
           gh pr list --state merged --base main --json headRefName \
             --jq '.[].headRefName' | grep -q 'feature/mi-funcion'
 
-      # ── C11–C14. Branch sugerencia/* ──────────────────────────────
-
+      # — C11–C14. Branch sugerencia/* —
       - name: "C11. Branch sugerencia/* fue creada"
         id: c11
         continue-on-error: true
@@ -123,8 +120,7 @@ jobs:
           [ "$(gh pr view "$PR" --json reviews \
             --jq '[.reviews[] | select(.state == "APPROVED")] | length')" -gt 0 ]
 
-      # ── C15–C21. Preguntas conceptuales ───────────────────────────
-
+      # — C15–C21. Preguntas conceptuales —
       - name: "C15. P1: concepto de branches"
         id: c15
         continue-on-error: true
